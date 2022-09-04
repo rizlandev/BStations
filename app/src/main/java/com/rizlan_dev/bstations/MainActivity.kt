@@ -158,11 +158,16 @@ class MainActivity :  AppCompatActivity() {
 
                 Lv_stations.setOnItemClickListener { parent, view, position, id ->
                     val element = adapter.getItem(position)
+                    val sel_station = element as Stations
 
                    // Toast.makeText(applicationContext, "Selected item is " + element.toString(), Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@MainActivity, DetailActivity::class.java)
 
-
+                    intent.putExtra("id_label", sel_station.id+" "+ sel_station.lable)
+                    intent.putExtra("avb_bike", sel_station.avb_bike)
+                    intent.putExtra("avb_space", sel_station.avb_place)
+                    intent.putExtra("lat", sel_station.lat+"")
+                    intent.putExtra("lon", sel_station.lon+"")
 
                     startActivity(intent)
 

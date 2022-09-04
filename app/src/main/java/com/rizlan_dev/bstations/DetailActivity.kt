@@ -4,6 +4,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -23,16 +25,43 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
     private val UPDATE_INTERVAL = (10 * 1000).toLong()  /* 10 secs */
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
 
-    private var latitude = 0.0
-    private var longitude = 0.0
+    private val latitude = 0.0
+    private val longitude = 0.0
 
     private lateinit var mGoogleMap: GoogleMap
+
+    lateinit var txt_view_id_lable: TextView
+    lateinit var txt_view_avb_bike: TextView
+    lateinit var txt_view_avb_space: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_view)
 
+
+
+        var bundle :Bundle ?=intent.extras
+        val id_lbl = bundle!!.getString("id_label")
+        val avb_bike = bundle!!.getString("avb_bike")
+        val avb_space = bundle!!.getString("avb_space")
+        val lat = bundle!!.getString("lat")
+        val lon = bundle!!.getString("lon")
+
+
+
+        // findViewById and set view id
+        txt_view_id_lable = findViewById(R.id.tv_id_name)
+        txt_view_avb_bike = findViewById(R.id.tv_avb_bike)
+        txt_view_avb_space = findViewById(R.id.tv_avb_place)
+
+        txt_view_id_lable.text = id_lbl
+        txt_view_avb_bike.text = avb_bike
+        txt_view_avb_space.text = avb_space
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
+
+
         mapFragment.getMapAsync(this)
     }
 
